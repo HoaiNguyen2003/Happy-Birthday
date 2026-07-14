@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="Happy Birthday Website 2.0 | Aoudumber Bade">
+    <meta name="github" content="https://github.com/Aoudumber-Bade">
+    <title>Happy Birthday, Bestie! 🎁</title>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Coiny&family=Titan+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nerko+One&family=Sriracha&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+:root{
+    --color-pink: #feecea;
+    --color-white: #fff;
+    --color-black: #333;
+    --color-text-pink: #0072ff;
+    --color-heart: #00d2ff;
+    --color-bg-letter: #fff8e4;
+    --color-border: #DACCBF;
+}
+html{
+    height: 100%;
+}
+body {
+    position: relative;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-image:linear-gradient(var(--color-pink), var(--color-pink));
+}
+#wrapper{
+    position: relative;
+    background-color: transparent;
+    background-image: linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 1) 25%, rgba(255, 255, 255, 1) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 1) 75%, rgba(255, 255, 255, 1) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 1) 25%, rgba(255, 255, 255,1) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 1) 75%, rgba(255, 255, 255, 1) 76%, transparent 77%, transparent);
+    height:100%;
+    background-size:80px 80px;
+    overflow: hidden;
+    z-index: 1;
+}
+.flag__birthday{
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-200px);
+    animation: translateYFlag 1.5s 2s forwards;
+}
+@keyframes translateYFlag{
+    to{
+        transform: translateY(-10px);
+    }
+}
+.flag__birthday .flag__left{
+    transform: rotate(-10deg) translate(-20px,30px);
+}
+.flag__birthday .flag__right{
+    transform: rotate(10deg) translate(20px,30px) scaleX(-1);
+}
+.content{
+    width: 100%;
+    position: relative;
+    display: flex;
+    padding-top: 3rem;
+}
+.content .left, .content .right{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.content .left{
+    width: 40%;
+}
+.content .right{
+    width: 60%;
+}
+.left .btn{
+    transform: scale(0);
+    animation: scaleCricle 2s 16s forwards ease-in-out;
+}
+#btn__letter{
+    position: relative;
+    margin-top: 30px;
+    background: linear-gradient(45deg, #00d2ff, #0072ff) !important;
+    color: white !important;
+    outline: none;
+    padding: 10px 25px;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    border: 3px solid white !important;
+    font-family: "Sriracha", cursive;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    transform: scale(1);
+    transition: all .5s ease-in-out;
+    box-shadow: 0 4px 15px rgba(0, 114, 255, 0.4) !important;
+}
+#btn__letter:active{
+    transform: scale(0.7);
+}
+#btn__letter i{
+    margin-left: 5px;
+}
+#btn__letter:hover{
+    border-color: var(--color-heart);
+    background-color: var(--color-heart);
+    color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+#btn__letter:hover i{
+    animation: rotateHeart 1s infinite linear;
+}
+@keyframes rotateHeart{
+    0%,50%, 100%{
+        transform: rotate(0deg);
+    }
+    25%{
+        transform: rotate(12deg);
+    }
+    75%{
+        transform: rotate(-12deg);
+    }
+}
+.title{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-family: "Titan One", sans-serif;
+    font-size: 3rem;
+    flex-direction: column;
+    perspective: 1000px;
+}
+.title .happy, .title .birthday{
+    position: relative;
+    text-shadow: 4px 4px var(--color-black), 
+                -4px 4px var(--color-black), 
+                4px -4px var(--color-black), 
+                -4px -4px var(--color-black), 
+                4px 8px 0 var(--color-black);
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+}
+.title .happy{
+    color: var(--color-white);
+}
+.title .happy span, .title .birthday span{
+    transform: translateY(50px);
+    opacity: 0;
+    visibility: hidden;
+    animation: txtTranslateY .5s var(--t) forwards;
+}
+@keyframes txtTranslateY{
+    100%{
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+}
+.title .birthday{
+    color: var(--color-text-pink);
+}
+
+.title .hat{
+    position: absolute;
+    right: 45px;
+    top: -350px;
+    transform: rotate(-40deg);
+    z-index: -1;
+    animation: topHat 4s 7s forwards ease;
+}
+@keyframes topHat{
+    20%, 30%{
+        top: -30px;
+        transform-origin: left;
+        transform: rotate(-40deg);
+    }
+    35%, 100%{
+        top: -30px;
+        transform: rotate(0deg);
+    }
+}
+.date__of__birth, .name{
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    background-color: var(--color-text-pink);
+    border-radius: 50px;
+    margin-top: 20px;
+    font-family: "Sriracha", cursive;
+    
+}
+.date__of__birth{
+    border: 3px solid var(--color-black);
+    position: relative;
+    transform: translateY(-100px);
+    z-index: -1;
+    opacity: 0;
+    visibility: hidden;
+    width: 0px;
+    animation: dateOfBirth 5s 9s forwards;
+}
+@keyframes dateOfBirth{
+    20%,40%{
+        width: 0px;
+        height: 0;
+        transform: translateY(0px);
+        opacity: 1;
+        visibility: visible;
+    }
+    45%{
+        transform: translateY(0px);
+        opacity: 1;
+        visibility: visible;
+        width: 300px;
+        height: 0px;
+    }
+    50%,100%{
+        transform: translateY(0px);
+        opacity: 1;
+        visibility: visible;
+        width: 300px;
+        height: 50px;
+    }
+}
+.name{
+    position: absolute;
+    padding: 0px 20px;
+    bottom: -20px;
+    border: 3px solid var(--color-black);
+    font-family: 'Dancing Script', cursive;
+}
+.date__of__birth span, .name span{
+    font-weight: bold;
+    margin: 0px 40px;
+}
+.date__of__birth span{
+    font-size: 1.2rem;
+}
+.name span{
+    font-size: 1.7rem;
+}
+.right .box__account{
+    position: relative;
+    transform: translateY(700px);
+    animation: topBoxImage 8s 7s forwards ease-in;
+}
+@keyframes topBoxImage{
+    to{
+        transform: translateY(0);
+    }
+}
+.content .right .image{
+    position: relative;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    border: 6px solid var(--color-black);
+}
+.content .right .image img{
+    width: 100%;
+    object-fit: cover;
+
+}
+.cricle{
+    position: absolute;
+    top: 20px;
+    right: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0);
+    animation: scaleCricle 3s 15s forwards ease-in-out;
+}
+@keyframes scaleCricle {
+    0%{
+        transform: scale(0);
+    }
+    10%{
+        transform: scale(1.3);
+    }
+    20%{
+        transform: scale(0.7);
+    }
+    30%,100%{
+        transform: scale(1);
+    }
+
+}
+.text__cricle{
+    width: 100px;
+    height: 100px;
+    background-color: var(--color-text-pink);
+    border-radius: 50%;
+    border: 5px solid var(--color-black);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: rotateCricle 5s linear infinite;
+}
+@keyframes rotateCricle{
+    to{
+        transform: rotate(360deg);
+    }
+}
+.text__cricle span{
+    top: 0%;
+    left: 50%;
+    position: absolute;
+    color: var(--color-black);
+    transform: rotate(calc(var(--i) * 24deg));
+    transform-origin: 0 45px;
+    font-family: "Sriracha", cursive;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+}
+.fa-heart{
+    color: var(--color-heart);
+    filter: drop-shadow(0 0 3px var(--color-heart));
+    animation: scaleHeart 1s infinite linear;
+}
+.cricle .fa-heart{
+    position: absolute;
+    transform: scale(0.85);
+}
+@keyframes scaleHeart{
+    50%{
+        transform: scale(1.2);
+    }
+}
+.right .balloon_one{
+    position: absolute;
+    top: -70px;
+    left: -70px;
+    animation: balloon1 2s infinite linear;
+}
+@keyframes balloon1{
+    0%, 50%,100%{
+        transform-origin: bottom right;
+        transform: rotate(0deg);
+    }
+    25%{
+        transform-origin: bottom right;
+        transform: rotate(3deg);
+    }
+    75%{
+        transform-origin: bottom right;
+        transform: rotate(-3deg);
+    }
+}
+.right .balloon_two{
+    position: absolute;
+    top: 170px;
+    right: -65px;
+    z-index: -1;
+    transform: rotate(10deg);
+    animation: balloon2 2s infinite linear;
+}
+@keyframes balloon2 {
+    0%,50%,100%{
+        transform-origin: bottom left;
+        transform: rotate(10deg);
+    }
+    25%{
+        transform-origin: bottom left;
+        transform: rotate(7deg);
+    }
+    75%{
+        transform-origin: bottom left;
+        transform: rotate(13deg);
+    }
+}
+
+.decorate_star{
+    position: absolute;
+    transform: scale(0);
+    background-color: var(--color-black);
+    clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);
+    animation: scaleCricle 3s var(--t) forwards, 
+            scaleStar 2s 16s infinite ease-in-out;
+}
+.decorate_star.star1{
+    width: 20px;
+    height: 20px;
+    top: 75px;
+    left: 300px;
+}
+.decorate_star.star2{
+    width: 15px;
+    height: 20px;
+    top: 35px;
+    right: 360px;
+}
+.decorate_star.star3{
+    width: 14px;
+    height: 14px;
+    top: 290px;
+    left: 630px;
+}
+.decorate_star.star4{
+    width: 18px;
+    height: 18px;
+    bottom: 60px;
+    left: 35px;
+}
+.decorate_star.star5{
+    width: 16px;
+    height: 18px;
+    bottom: 140px;
+    left: 500px;
+}
+@keyframes scaleStar {
+    25%{
+        transform: scale(0.8);
+    }
+    50%{
+        transform: scale(1.1);
+    }
+}
+.decorate_bottom{
+    position: absolute;
+    right: 0;
+    bottom: -10px;
+}
+.decorate_flower--one{
+    position: absolute;
+    top: 250px;
+    left: 50px;
+    transform: scale(0);
+    animation: scaleCricle 3s var(--t) forwards ease-in-out;
+}
+.decorate_flower--two{
+    position: absolute;
+    top: 225px;
+    left: 540px;
+    transform: scale(0);
+    animation: scaleCricle 3s var(--t) forwards ease-in-out;
+}
+.decorate_flower--three{
+    position: absolute;
+    top: 150px;
+    right: 235px;
+    transform: scale(0);
+    animation: scaleCricle 3s var(--t) forwards ease-in-out;
+}
+.smiley__icon{
+    position: absolute;
+    bottom: 180px;
+    left: 600px;
+    transform: scale(0);
+    animation: scaleCricle 3s 15s forwards ease-in-out;
+}
+
+
+.box__letter{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.5);
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    display: none;
+}
+.box__letter .letter__border{
+    position: absolute;
+    width: 55vw;
+    height: 450px;
+    background-color: var(--color-white);
+    border-radius: 27px;
+    padding: 17px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: none;
+}
+.letter__border .close{
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    width: 30px;
+    height: 30px;
+    background-color: var(--color-white);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    cursor: pointer;
+}
+.letter__border .letter{
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-bg-letter);
+    border-radius: 10px;
+    padding-top: 15px;
+}
+.letter__border .letter .title__letter{
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    font-weight: bold;
+    font-size: 2.4rem;
+}
+.title__letter .fa-solid{
+    margin-left: 5px;
+    font-size: 1.3rem;
+}
+.letter__border .letter .content__letter{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding-top: 1.5rem;
+    padding-bottom: 70px;
+}
+.letter__border .letter .content__letter .left{
+    position: relative;
+    width: 50%;
+    height: 100%;
+    padding: 1.7rem;
+    border-right: 3px solid var(--color-border);
+}
+.content__letter .left #heart__letter{
+    opacity: 0;
+    width: 100%;
+}
+#heart__letter.animationOp{
+    animation: opacityHeart 1s 1s forwards;
+}
+@keyframes opacityHeart{
+    to{
+        opacity: 1;
+    }
+}
+.content__letter .left .heart{
+    position: absolute;
+    opacity: 0;
+}
+.content__letter .left .heart.animation{
+    animation: scaleHeartLetter 1s var(--t) infinite ease-in-out;
+}
+@keyframes scaleHeartLetter{
+    0%{
+        opacity: 1;
+        transform: scale(0);
+    }
+    10%{
+        opacity: 1;
+        transform: scale(1.3);
+    }
+    20%{
+        opacity: 1;
+        transform: scale(0.7);
+    }
+    30%,100%{
+        opacity: 1;
+        transform: scale(1);
+    }
+    
+}
+.content__letter .left .heart_1{
+    top: 90px;
+    left: 30px;
+}
+.content__letter .left .heart_2{
+    top: 20px;
+    right: 70px;
+}
+.content__letter .left .heart_3{
+    bottom: 50px;
+    left: 145px;
+}
+.content__letter .left .heart_4{
+    top: 140px;
+    right: 35px;
+}
+.content__letter .right{
+    position: relative;
+    width: 50%;
+}
+.content__letter .right .love__img{
+    opacity: 0;
+    position: absolute;
+    right: 20px;
+    top: -100px;
+}
+.love__img.animationOp{
+    animation: opacityHeart 1s 1s forwards;
+}
+.content__letter .right .text__letter{
+    margin-top: 60px;
+    padding: 20px 15px 10px 15px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.3rem;
+}
+.content__letter .right #mewmew{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+}
+#mewmew.animationOp{
+    animation: opacityHeart 1s 1s forwards;
+}
+
+
+#copy {
+    position: fixed;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1rem;
+}
+
+#copy a {
+    text-decoration: none;
+    color: #191919d7;
+}
+
+#copy p {
+    color: #4275ff;
+    text-align: center;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+
+@media screen and (max-width: 658px)   {
+
+    .flag__birthday .flag__left {
+        transform: rotate(-10deg) translate(-119px,3px);
+    }
+
+    .flag__birthday .flag__right {
+        transform: rotate(10deg) translate(-106px,39px) scaleX(-1);
+    }
+
+    .content {
+        width: 100%;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 25px;
+        align-items: center;
+        padding-top: 2rem;
+    }
+
+    .title {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        font-family: "Titan One", sans-serif;
+        font-size: 1.5rem;
+        letter-spacing: 8px;
+        flex-direction: column;
+        perspective: 1000px;
+    }
+
+    #btn__letter {
+        position: relative;
+        margin-top: 17px;
+        width: 209px;
+        background-color: var(--color-text-pink);
+        outline: none;
+        padding: 6px 4px;
+        font-size: 1rem;
+        border-radius: 50px;
+        border: 3px solid var(--color-black);
+        font-family: "Sriracha", cursive;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 2;
+        /* transform: scale(1); */
+        transition: all .5s ease-in-out;
+    }
+
+    .cricle {
+        position: absolute;
+        top: 10px;
+        right: -54px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: scale(0);
+        animation: scaleCricle 3s 15s forwards ease-in-out;
+    }
+
+    .title .hat {
+        position: absolute;
+        right: -98px;
+        top: -51px !important;
+        transform: rotate(-40deg);
+        z-index: -1;
+        animation: topHat 4s 7s forwards ease;
+    }
+
+    .box__letter .letter__border {
+        position: absolute;
+        width: 90vw;
+        height: 315px;
+        background-color: var(--color-white);
+        border-radius: 27px;
+        padding: 17px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        display: none;
+    }
+
+    .letter__border .letter {
+        width: 100%;
+        height: 100%;
+        background-color: var(--color-bg-letter);
+        border-radius: 10px;
+        padding-top: 15px;
+    }
+
+    .letter__border .letter .title__letter {
+        text-align: center;
+        font-family: 'Dancing Script', cursive;
+        font-weight: bold;
+        font-size: 1.4rem;
+    }
+
+    .letter__border .letter .content__letter {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        padding-top: .7rem;
+        padding-bottom: 70px;
+    }
+
+    .content__letter .right .text__letter {
+        margin-top: -14px;
+        padding: 20px 15px 10px 15px;
+        font-family: 'Dancing Script', cursive;
+        font-size: .8rem;
+    }
+
+    .content__letter .right .love__img {
+        opacity: 0;
+        position: absolute;
+        right: 126px;
+        top: 167px;
+    }
+
+    .love__img img {
+ 
+            width: 84px;
+
+    }
+
+    .content .right .image {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        border: 6px solid var(--color-black);
+    }
+
+    .name {
+        position: absolute;
+        padding: 0px 3px;
+        bottom: -6px;
+        border: 3px solid var(--color-black);
+    }
+
+    .name span {
+        font-size: 1rem;
+    }
+
+    .right .balloon_one {
+        position: absolute;
+        top: 10px;
+        left: -77px;
+        animation: balloon1 2s infinite linear;
+    }
+
+    .right .balloon_one img{
+        width: 76px !important;
+    }
+
+
+}
+
+
+
+
+
+
+
+.boxMail{
+    position: fixed;
+    background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px);
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0.3);
+    visibility: hidden;
+    transition: all 0.5s;
+    z-index: 100000000;
+}
+.boxMail.active{
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+.boxMail .boxMail-container{
+    position: absolute;
+    width: 750px;
+    height: 500px;
+    display: flex;
+    margin: 0;
+    transform: scale(0.9);
+    -webkit-perspective: 2000px;
+    perspective: 2000px;
+    transition: all 0.5s;
+}
+.boxMail .boxMail-container:hover{
+    transform: rotate(-5deg);
+    filter: drop-shadow(0 0 10px #FF7882);
+}
+.boxMail .boxMail-container:hover .card1{
+    transform: translate(-187px, -250px) rotateY(-140deg);
+}
+.boxMail .boxMail-container .card1,
+.boxMail .boxMail-container .card2{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+}
+.boxMail .boxMail-container .card1 {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, #FF7882, #FF7882 63%);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.boxMail-container .card1{
+    z-index: 1;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    transform-origin: left;
+    transition: all 1s ease-in-out;
+}
+.boxMail .boxMail-container .card1 .userImg{
+    position: relative;
+    width: 80px;
+    height: 80px;
+    background-color: white;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid white;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+.boxMail .boxMail-container .card1 .userImg img{
+    position: absolute;
+    object-fit: cover;
+    width: calc(100%);
+    height: calc(100%);
+}
+.boxMail .boxMail-container .card1 h3{
+    font-family: 'Dancing Script', cursive;
+    font-size: 40px;
+    text-transform: uppercase;
+    width: 80%;
+    text-align: center;
+    line-height: 1.5;
+    letter-spacing: 5px;
+    transform: rotate(-5deg);
+    text-shadow: 0 0 5px white,
+                0 0 10px white;
+}
+.boxMail .boxMail-container .card2{
+    position: relative;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, #e0e0e0, #ffffff 30%);
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    transform-origin: left;
+    transition: all 1s;
+}
+.boxMail .boxMail-container .card2 .card2-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: #FF7882;
+    transition: all 1s;
+    overflow: hidden;
+    font-family: "Inter", serif;
+    color: #fff;
+}
+.boxMail .boxMail-container:hover .card2-content{
+    transform: translate(20px, 20px);
+    box-shadow: -1px -1px 5px rgb(0, 0, 0, 0.4);
+}
+.boxMail .boxMail-container .card2 h3{
+    font-family: 'Dancing Script', cursive;
+    padding: 20px 0px 10px 60px;
+    opacity: 0;
+    visibility: hidden;
+    font-size: 25px;
+    text-shadow: 0 0 8px #FF7882;
+}
+.boxMail .boxMail-container .card2:hover h3{
+    animation: texth3 3s forwards;
+    animation-delay: 2s;
+    transition: 1s;
+}
+@keyframes texth3{
+    0%{
+        opacity: 1;
+        visibility: visible;
+        padding: 20px 0px 10px 60px;
+    }
+    100%{
+        opacity: 1;
+        visibility: visible;
+        padding: 20px 0px 10px 152px; 
+    }
+}
+.boxMail .boxMail-container .card2 h2{
+    font-family: 'Dancing Script', cursive;
+    padding: 0px 20px;
+    text-indent: 20px;
+    font-size: 22px;
+    opacity: 0;
+}
+.boxMail .boxMail-container .card2:hover h2{
+    animation: texth2 2s forwards;
+    animation-delay: 4s;
+    transition: 1s;
+}
+@keyframes texth2{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+.boxMail .boxMail-container .card2 .card2-content .imageCute2{
+    position: absolute;
+    top: 5px;
+    left: 20px;
+    opacity: 0;
+    transition: 1s;
+}
+.boxMail .boxMail-container .card2 .card2-content:hover .imageCute2{
+    animation: cute3 1s linear infinite,
+                cute4 3s 2s forwards;
+    animation-delay: 2s;
+    transition: 1s;
+}
+@keyframes cute3{
+    0%{
+        opacity: 1;
+        transform: rotate(0deg);
+    }
+    25%{
+        opacity: 1;
+        transform: rotate(5deg);
+    }
+    50%{
+        opacity: 1;
+        transform: rotate(0deg);
+    }
+    75%{
+        opacity: 1;
+        transform: rotate(-5deg);
+    }
+    100%{
+        opacity: 1;
+        transform: rotate(0deg);
+    }
+}
+@keyframes cute4{
+    0%{
+        left: 20px;
+    }
+    100%{
+        left: 100px;
+    }
+}
+.boxMail .boxMail-container .card2 .card2-content .imageCute2 img{
+    width: 40px;
+}
+.boxMail .fa-xmark{
+    position: fixed;
+    top: 0;
+    right: 0;
+    font-size: 30px;
+    padding: 10px 25px;
+    cursor: pointer;
+    color: white;
+    z-index: 10000000000000000;
+}
+/* Navigation buttons container style */
+.nav-buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 40px auto;
+    z-index: 99;
+    position: relative;
+    width: 100%;
+}
+.next-btn-surprise, .back-btn-surprise {
+    padding: 12px 35px;
+    color: white;
+    border: 3px solid white;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(0, 114, 255, 0.4);
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+.next-btn-surprise {
+    background: linear-gradient(45deg, #00d2ff, #0072ff);
+}
+.next-btn-surprise:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 114, 255, 0.6);
+    background: linear-gradient(45deg, #0072ff, #00d2ff);
+}
+.back-btn-surprise {
+    background: linear-gradient(45deg, #75c6ff, #0072ff);
+}
+.back-btn-surprise:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 114, 255, 0.6);
+    background: linear-gradient(45deg, #0072ff, #75c6ff);
+}
+
+@media screen and (max-width: 658px) {
+    .nav-buttons-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+}
+
+</style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Poppins:wght@400;600&display=swap"
+        rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="transition-helper.js"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="flag__birthday">
+            <img src="image/aqsa/1.png" alt="" width="350" class="flag__left">
+            <img src="image/aqsa/1.png" alt="" width="350" class="flag__right">
+        </div>
+        <div class="content">
+            <div class="left">
+                <div class="title">
+                    <h1 class="happy">
+                        <span style="--t: 4s;">H</span>
+                        <span style="--t: 4.2s;">a</span>
+                        <span style="--t: 4.4s;">p</span>
+                        <span style="--t: 4.6s;">p</span>
+                        <span style="--t: 4.8s;">y</span>
+                    </h1>
+                    <h1 class="birthday">
+                        <span style="--t: 5s;">B</span>
+                        <span style="--t: 5.2s;">i</span>
+                        <span style="--t: 5.4s;">r</span>
+                        <span style="--t: 5.6s;">t</span>
+                        <span style="--t: 5.8s;">h</span>
+                        <span style="--t: 6s;">d</span>
+                        <span style="--t: 6.2s;">a</span>
+                        <span style="--t: 6.4s;">y</span>
+                    </h1>
+                    <div class="hat">
+                        <img src="image/aqsa/hat.png" alt="" width="130">
+                    </div>
+                </div>
+                <div class="date__of__birth">
+                    <span></span>
+                </div>
+                <div class="btn">
+                    <button id="btn__letter">
+                        <div class="mail">
+                            Click Here Bestie 🎁
+                            <i class="fa-regular fa-envelope"></i>
+                        </div>
+                    </button>
+
+                </div>
+            </div>
+            <div class="right">
+                <div class="box__account">
+                    <div class="image">
+                        <img src="./image/aqsa/unnamed.png" alt="">
+                    </div>
+                    <div class="name">
+                        <i class="fa-solid fa-heart"></i>
+                        <span>Dear Mehwish</span>
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <div class="balloon_one">
+                        <img width="100px" src="image/aqsa/balloon1.png" alt="">
+                    </div>
+                    <div class="balloon_two">
+                        <img width="100px" src="image/aqsa/balloon2.png" alt="">
+                    </div>
+                </div>
+                <div class="cricle">
+                    <div class="text__cricle">
+                        <span style="--i: 1;">h</span>
+                        <span style="--i: 2;">a</span>
+                        <span style="--i: 3;">p</span>
+                        <span style="--i: 4;">p</span>
+                        <span style="--i: 5;">y</span>
+                        <span style="--i: 6;">-</span>
+                        <span style="--i: 7;">b</span>
+                        <span style="--i: 8;">i</span>
+                        <span style="--i: 9;">r</span>
+                        <span style="--i: 10;">t</span>
+                        <span style="--i: 11;">h</span>
+                        <span style="--i: 12;">d</span>
+                        <span style="--i: 13;">a</span>
+                        <span style="--i: 14;">y</span>
+                        <span style="--i: 15;">-</span>
+                    </div>
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+            </div>
+        </div>
+        <div class="decorate_star star1" style="--t: 15s;"></div>
+        <div class="decorate_star star2" style="--t: 15.2s;"></div>
+        <div class="decorate_star star3" style="--t: 15.4s;"></div>
+        <div class="decorate_star star4" style="--t: 15.6s;"></div>
+        <div class="decorate_star star5" style="--t: 15.8s;"></div>
+        <div class="decorate_flower--one" style="--t: 15s;">
+            <img width="20" src="image/aqsa/decorate_flower.png" alt="">
+        </div>
+        <div class="decorate_flower--two" style="--t: 15.3s;">
+            <img width="20" src="image/aqsa/decorate_flower.png" alt="">
+        </div>
+        <div class="decorate_flower--three" style="--t: 15.6s;">
+            <img width="20" src="image/aqsa/decorate_flower.png" alt="">
+        </div>
+        <div class="decorate_bottom">
+            <img src="image/aqsa/decorate.png" alt="" width="100">
+        </div>
+        <div class="smiley__icon">
+            <img src="image/aqsa/smiley_icon.png" alt="" width="100">
+        </div>
+
+
+        <div class="boxMail">
+            <i class="fa-solid fa-xmark"></i>
+            <div class="boxMail-container">
+                <div class="card1">
+                    <div class="userImg">
+                        <img src="image/aqsa/unnamed.png" alt="">
+                    </div>
+                    <h4 class="username">To: Mehwish 💖<span class="underline"></span></h4>
+
+                    <h3>Happy Birthday</h3>
+                    <div class="imageCute">
+                        <img src="image/aqsa/love.png" alt="">
+                    </div>
+                </div>
+                <div class="card2">
+                    <div class="card2-content">
+                        <h3>To You!</h3>
+                        <h2>Happy birthday 🥳🎂🥳 chanda the day you come into my life I was not really much attached to
+                            you but day by day you became close to my heart . And now you are truly my younger sister. I
+                            wish I could remove some of the pain from your life which you are bearing alone. But you're
+                            always welcome 🤗 you can talk anytime you want to talk specially those which you can't say
+                            to others. And this year your all dreams come true . I wish that your
+                            brother could wish you but if couldn't wish on him behalf I am wishing you happy birthday
+                            🎈🎂🎈 sana . Don't be Sad ok be happy 😌
+                        </h2>
+
+                        <div class="imageCute2">
+                            <img src="image/aqsa/mewmew.gif" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons-container">
+        <button class="back-btn-surprise" onclick="window.navigateToPage('index.html')">◀ Quay lại trang khóa</button>
+        <button class="next-btn-surprise" onclick="window.navigateToPage('memorylane.html')">Xem trang kỷ niệm ➔</button>
+    </div>
+
+    <script src="audio-helper.js"></script>
+</body>
+<script>
+    // Date animation (types out actual birthdate)
+    let datetxt = "23 July";
+    let charArrDate = datetxt.split('');
+    let currentIndex = 0;
+    let date__of__birth = document.querySelector(".date__of__birth span");
+    
+    // Start typing date after some time
+    setTimeout(function () {
+        let timeDatetxt = setInterval(function () {
+            if (currentIndex < charArrDate.length) {
+                date__of__birth.textContent += charArrDate[currentIndex];
+                currentIndex++;
+            }
+            else {
+                let i = document.createElement("i");
+                i.className = "fa-solid fa-star";
+                document.querySelector(".date__of__birth").prepend(i);
+                document.querySelector(".date__of__birth").appendChild(i.cloneNode(true));
+                clearInterval(timeDatetxt);
+            }
+        }, 100);
+    }, 4000);
+
+    // Mail envelope actions
+    let mailBox = document.querySelector('.mail');
+    let boxmail = document.querySelector('.boxMail');
+    var close = document.querySelector('.fa-xmark');
+    
+    mailBox.onclick = function () {
+        mailBox.classList.toggle('active');
+        boxmail.classList.add('active');
+    };
+
+    close.addEventListener('click', function () {
+        boxmail.classList.remove('active');
+    });
+</script>
+
+</html>

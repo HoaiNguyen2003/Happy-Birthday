@@ -19,7 +19,7 @@
           135deg,
           #ffcee6 0%,
           #ffd6f1 50%,
-          #e4f9ff 100%
+          #d6ffff 100%
         );
         min-height: 100vh;
         overflow-x: hidden;
@@ -41,6 +41,7 @@
         background: #ffd1f9;
         top: -20px;
         opacity: 0;
+        will-change: transform;
       }
 
       .scrapbook-bg {
@@ -68,7 +69,7 @@
 
       .header h1 {
         font-size: 3.5rem;
-        color: #ff4e91;
+        color: #00d2ff;
         margin-bottom: 1rem;
         font-family: "Pacifico", cursive;
         text-shadow: 3px 3px 0px rgba(255, 165, 213, 0.5);
@@ -103,7 +104,7 @@
       .btn {
         padding: 0.8rem 1.5rem;
         margin: 0 0.5rem;
-        background: linear-gradient(45deg, #ff6ec4, #7873f5);
+        background: linear-gradient(45deg, #00d2ff, #0072ff);
         color: white;
         border: none;
         border-radius: 25px;
@@ -113,13 +114,13 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 4px 15px rgba(255, 110, 196, 0.5);
+        box-shadow: 0 4px 15px rgba(0, 114, 255, 0.4);
       }
 
       .btn:hover {
-        background: linear-gradient(45deg, #7873f5, #ff6ec4);
+        background: linear-gradient(45deg, #0072ff, #00d2ff);
         transform: translateY(-2px) scale(1.05);
-        box-shadow: 0 6px 20px rgba(255, 110, 196, 0.7);
+        box-shadow: 0 6px 20px rgba(0, 114, 255, 0.6);
       }
 
       .btn i {
@@ -136,6 +137,13 @@
         scroll-behavior: smooth;
         scrollbar-width: thin;
         scrollbar-color: #ff6ec4 #ffcee6;
+        cursor: grab;
+        scroll-snap-type: x proximity;
+      }
+
+      .gallery.active {
+        cursor: grabbing;
+        user-select: none;
       }
 
       .gallery::-webkit-scrollbar {
@@ -148,7 +156,7 @@
       }
 
       .gallery::-webkit-scrollbar-thumb {
-        background: #ff6ec4;
+        background: linear-gradient(135deg, #ff6ec4, #00d2ff);
         border-radius: 10px;
       }
 
@@ -162,12 +170,17 @@
         box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
         transform: translateY(50px) rotate(var(--rotate, 0deg));
         opacity: 0;
-        transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.8s ease;
         border: 8px solid white;
+        will-change: transform, opacity;
+        scroll-snap-align: center;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        transform: translate3d(0, 0, 0) translateY(50px) rotate(var(--rotate, 0deg));
       }
 
       .memory-card.visible {
-        transform: translateY(0) rotate(var(--rotate, 0deg));
+        transform: translate3d(0, 0, 0) translateY(0) rotate(var(--rotate, 0deg));
         opacity: 1;
       }
 
@@ -249,11 +262,24 @@
       .navigation-buttons {
         display: flex;
         justify-content: space-between;
+        align-items: center; /* Center items vertically */
         margin-top: 3rem;
       }
 
+      /* Position audio controls statically at the bottom center of the page flow */
+      .audio-controls {
+        position: relative !important;
+        bottom: auto !important;
+        left: auto !important;
+        right: auto !important;
+        transform: none !important;
+        margin: 0 !important;
+        width: max-content !important;
+        z-index: 10 !important;
+      }
+
       #nextButton {
-        background: linear-gradient(45deg, #ff4e91, #ff9a8b);
+        background: linear-gradient(45deg, #00d2ff, #0072ff);
         font-size: 1.1rem;
         padding: 1rem 2rem;
         position: relative;
@@ -275,11 +301,11 @@
 
       #nextButton:hover {
         transform: translateY(-4px) scale(1.05);
-        box-shadow: 0 8px 25px rgba(255, 78, 145, 0.5);
+        box-shadow: 0 8px 25px rgba(0, 114, 255, 0.5);
       }
 
       #backButton {
-        background: linear-gradient(45deg, #a485ff, #75c6ff);
+        background: linear-gradient(45deg, #75c6ff, #0072ff);
       }
 
       .sticker {
@@ -393,15 +419,15 @@
       @keyframes pulse {
         0% {
           transform: scale(1);
-          box-shadow: 0 4px 15px rgba(255, 110, 196, 0.5);
+          box-shadow: 0 4px 15px rgba(0, 114, 255, 0.4);
         }
         50% {
           transform: scale(1.05);
-          box-shadow: 0 10px 25px rgba(255, 110, 196, 0.7);
+          box-shadow: 0 10px 25px rgba(0, 114, 255, 0.6);
         }
         100% {
           transform: scale(1);
-          box-shadow: 0 4px 15px rgba(255, 110, 196, 0.5);
+          box-shadow: 0 4px 15px rgba(0, 114, 255, 0.4);
         }
       }
 
@@ -494,6 +520,161 @@
           max-width: 200px;
         }
       }
+
+      /* Lightbox Modal */
+      .lightbox-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s ease;
+      }
+
+      .lightbox-modal.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .lightbox-content {
+        background: rgba(255, 255, 255, 0.95);
+        border: 10px solid white;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        max-width: 700px;
+        width: 90%;
+        padding: 1.5rem;
+        position: relative;
+        transform: scale(0.85);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .lightbox-modal.open .lightbox-content {
+        transform: scale(1);
+      }
+
+      .lightbox-img {
+        max-height: 65vh;
+        width: 100%;
+        object-fit: contain;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff9fc;
+      }
+
+      .lightbox-caption {
+        margin-top: 1.2rem;
+        font-size: 1.15rem;
+        color: #4a4a4a;
+        line-height: 1.6;
+        font-weight: 500;
+      }
+
+      .lightbox-emoji {
+        position: absolute;
+        top: -25px;
+        right: -25px;
+        width: 55px;
+        height: 55px;
+        background: linear-gradient(135deg, #ff6ec4, #00d2ff);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.6rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        animation: floatSticker 3s ease-in-out infinite;
+        z-index: 10;
+      }
+
+      @keyframes floatSticker {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-6px) rotate(8deg); }
+      }
+
+      .lightbox-close {
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 3.5rem;
+        cursor: pointer;
+        line-height: 0.7;
+        transition: all 0.3s ease;
+        z-index: 2100;
+      }
+
+      .lightbox-close:hover {
+        transform: scale(1.15) rotate(90deg);
+        color: #00d2ff;
+      }
+
+      .lightbox-nav {
+        position: absolute;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 3rem;
+        pointer-events: none;
+        z-index: 2050;
+      }
+
+      .lightbox-nav-btn {
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.95);
+        border: none;
+        border-radius: 50%;
+        color: #00d2ff;
+        font-size: 1.6rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: auto;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+        user-select: none;
+      }
+
+      .lightbox-nav-btn:hover {
+        background: #00d2ff;
+        color: white;
+        transform: scale(1.1);
+      }
+
+      @media (max-width: 768px) {
+        .lightbox-nav {
+          padding: 0 1rem;
+        }
+        .lightbox-nav-btn {
+          width: 45px;
+          height: 45px;
+          font-size: 1.3rem;
+        }
+        .lightbox-content {
+          padding: 1.2rem;
+          width: 92%;
+        }
+        .lightbox-img {
+          max-height: 50vh;
+        }
+      }
     </style>
     <script
       bis_use="true"
@@ -515,6 +696,7 @@
           U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
       }
     </style>
+    <script src="transition-helper.js"></script>
   </head>
   <body
     __processed_8f192fbf-a0ce-4632-9977-63aaa713b3a5__="true"
@@ -2135,389 +2317,6 @@
       <div class="gallery-container" bis_skin_checked="1">
         <div class="gallery" id="memoryGallery" bis_skin_checked="1">
           <!-- Images will be dynamically loaded here from JavaScript -->
-          <div
-            class="memory-card visible"
-            style="
-              --rotate: -2deg;
-              animation-delay: 0s;
-              translate: none;
-              rotate: none;
-              scale: none;
-              box-shadow: rgba(255, 105, 180, 0.3) 0px 10px 25px;
-              transform: rotate(-2.00003deg);
-            "
-            bis_skin_checked="1"
-          >
-            <div
-              class="card-tape"
-              style="--rotate: -4deg"
-              bis_skin_checked="1"
-            ></div>
-            <img class="memory-img" src="1.jpg" alt="Memory 1" />
-            <div class="memory-caption" bis_skin_checked="1">
-              Remember when we got lost hiking and found that amazing waterfall?
-              Best wrong turn ever! 😂
-            </div>
-            <div class="card-sticker" bis_skin_checked="1">
-              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="50" fill="#ff6ec4"></circle>
-                <text
-                  x="50"
-                  y="65"
-                  font-family="Arial"
-                  font-size="40"
-                  text-anchor="middle"
-                  fill="white"
-                >
-                  🌊
-                </text>
-              </svg>
-            </div>
-          </div>
-          <div
-            class="memory-card visible"
-            style="
-              --rotate: 3deg;
-              animation-delay: 0.1s;
-              translate: none;
-              rotate: none;
-              scale: none;
-              box-shadow: rgba(255, 105, 180, 0.3) 0px 10px 25px;
-              transform: translate(0px, 50px) rotate(3.00023deg);
-            "
-            bis_skin_checked="1"
-          >
-            <div
-              class="card-tape"
-              style="--rotate: 6deg"
-              bis_skin_checked="1"
-            ></div>
-            <img class="memory-img" src="2.jpeg" alt="Memory 2" />
-            <div class="memory-caption" bis_skin_checked="1">
-              That time we stayed up all night just talking and watching the
-              sunrise. I've never laughed so hard in my life!
-            </div>
-            <div class="card-sticker" bis_skin_checked="1">
-              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="50" fill="#ff6ec4"></circle>
-                <text
-                  x="50"
-                  y="65"
-                  font-family="Arial"
-                  font-size="40"
-                  text-anchor="middle"
-                  fill="white"
-                >
-                  🌅
-                </text>
-              </svg>
-            </div>
-          </div>
-          <div
-            class="memory-card visible"
-            style="
-              --rotate: -1deg;
-              animation-delay: 0.2s;
-              translate: none;
-              rotate: none;
-              scale: none;
-              box-shadow: rgba(255, 105, 180, 0.3) 0px 10px 25px;
-              transform: rotate(-0.99986deg);
-            "
-            bis_skin_checked="1"
-          >
-            <div
-              class="card-tape"
-              style="--rotate: -2deg"
-              bis_skin_checked="1"
-            ></div>
-            <img class="memory-img" src="3.jpg" alt="Memory 3" />
-            <div class="memory-caption" bis_skin_checked="1">
-              Our first road trip together! You fell asleep and I drew a tiny
-              mustache on you with a marker. You didn't notice for HOURS!
-            </div>
-            <div class="card-sticker" bis_skin_checked="1">
-              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="50" fill="#ff6ec4"></circle>
-                <text
-                  x="50"
-                  y="65"
-                  font-family="Arial"
-                  font-size="40"
-                  text-anchor="middle"
-                  fill="white"
-                >
-                  🚗
-                </text>
-              </svg>
-            </div>
-          </div>
-          <div
-            class="memory-card visible"
-            style="
-              --rotate: 2deg;
-              animation-delay: 0.3s;
-              translate: none;
-              rotate: none;
-              scale: none;
-              box-shadow: rgba(255, 105, 180, 0.3) 0px 10px 25px;
-              transform: rotate(2.00003deg);
-            "
-            bis_skin_checked="1"
-          >
-            <div
-              class="card-tape"
-              style="--rotate: 4deg"
-              bis_skin_checked="1"
-            ></div>
-            <img class="memory-img" src="4.jpg" alt="Memory 4" />
-            <div class="memory-caption" bis_skin_checked="1">
-              Remember our cooking disaster when we tried to make that fancy
-              recipe? The smoke alarm going off, but the pizza we ordered after
-              was the best ever!
-            </div>
-            <div class="card-sticker" bis_skin_checked="1">
-              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="50" fill="#ff6ec4"></circle>
-                <text
-                  x="50"
-                  y="65"
-                  font-family="Arial"
-                  font-size="40"
-                  text-anchor="middle"
-                  fill="white"
-                >
-                  🍕
-                </text>
-              </svg>
-            </div>
-          </div>
-          <div
-            class="memory-card visible"
-            style="
-              --rotate: -3deg;
-              animation-delay: 0.4s;
-              translate: none;
-              rotate: none;
-              scale: none;
-              box-shadow: rgba(255, 105, 180, 0.3) 0px 10px 25px;
-              transform: rotate(-3.00023deg);
-            "
-            bis_skin_checked="1"
-          >
-            <div
-              class="card-tape"
-              style="--rotate: -6deg"
-              bis_skin_checked="1"
-            ></div>
-            <img class="memory-img" src="5.jpg" alt="Memory 5" />
-            <div class="memory-caption" bis_skin_checked="1">
-              Our camping trip under the stars. You were terrified of that tiny
-              spider and jumped so high! Still my favorite memory.
-            </div>
-            <div class="card-sticker" bis_skin_checked="1">
-              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="50" fill="#ff6ec4"></circle>
-                <text
-                  x="50"
-                  y="65"
-                  font-family="Arial"
-                  font-size="40"
-                  text-anchor="middle"
-                  fill="white"
-                >
-                  🏕️
-                </text>
-              </svg>
-            </div>
-          </div>
-          <div
-            class="memory-card visible"
-            style="
-              --rotate: 1deg;
-              animation-delay: 0.5s;
-              translate: none;
-              rotate: none;
-              scale: none;
-              box-shadow: rgba(255, 105, 180, 0.3) 0px 10px 25px;
-              transform: rotate(0.99986deg);
-            "
-            bis_skin_checked="1"
-          >
-            <div
-              class="card-tape"
-              style="--rotate: 2deg"
-              bis_skin_checked="1"
-            ></div>
-            <img class="memory-img" src="7.jpg" alt="Memory 6" />
-            <div class="memory-caption" bis_skin_checked="1">
-              That concert where we danced until our feet hurt. Worth every
-              blister!
-            </div>
-            <div class="card-sticker" bis_skin_checked="1">
-              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="50" fill="#ff6ec4"></circle>
-                <text
-                  x="50"
-                  y="65"
-                  font-family="Arial"
-                  font-size="40"
-                  text-anchor="middle"
-                  fill="white"
-                >
-                  🎵
-                </text>
-              </svg>
-            </div>
-          </div>
-          <div
-            class="memory-card visible"
-            style="
-              --rotate: -2deg;
-              animation-delay: 0.6s;
-              translate: none;
-              rotate: none;
-              scale: none;
-              box-shadow: rgba(255, 105, 180, 0.3) 0px 10px 25px;
-              transform: rotate(-2.00003deg);
-            "
-            bis_skin_checked="1"
-          >
-            <div
-              class="card-tape"
-              style="--rotate: -4deg"
-              bis_skin_checked="1"
-            ></div>
-            <img class="memory-img" src="8.jpg" alt="Memory 7" />
-            <div class="memory-caption" bis_skin_checked="1">
-              When we built that epic blanket fort during the storm and watched
-              movies all day. Best rainy day ever!
-            </div>
-            <div class="card-sticker" bis_skin_checked="1">
-              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="50" fill="#ff6ec4"></circle>
-                <text
-                  x="50"
-                  y="65"
-                  font-family="Arial"
-                  font-size="40"
-                  text-anchor="middle"
-                  fill="white"
-                >
-                  🏰
-                </text>
-              </svg>
-            </div>
-          </div>
-          <div
-            class="memory-card visible"
-            style="
-              --rotate: 2deg;
-              animation-delay: 0.7s;
-              translate: none;
-              rotate: none;
-              scale: none;
-              box-shadow: rgba(255, 105, 180, 0.3) 0px 10px 25px;
-              transform: rotate(2.00003deg);
-            "
-            bis_skin_checked="1"
-          >
-            <div
-              class="card-tape"
-              style="--rotate: 4deg"
-              bis_skin_checked="1"
-            ></div>
-            <img class="memory-img" src="1.jpg" alt="Memory 8" />
-            <div class="memory-caption" bis_skin_checked="1">
-              Our spontaneous beach day when we skipped class. I still find sand
-              in my backpack sometimes!
-            </div>
-            <div class="card-sticker" bis_skin_checked="1">
-              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="50" fill="#ff6ec4"></circle>
-                <text
-                  x="50"
-                  y="65"
-                  font-family="Arial"
-                  font-size="40"
-                  text-anchor="middle"
-                  fill="white"
-                >
-                  🏖️
-                </text>
-              </svg>
-            </div>
-          </div>
-          <div
-            class="memory-card visible"
-            style="
-              --rotate: -1deg;
-              animation-delay: 0.8s;
-              translate: none;
-              rotate: none;
-              scale: none;
-              box-shadow: rgba(255, 105, 180, 0.3) 0px 10px 25px;
-              transform: rotate(-0.99986deg);
-            "
-            bis_skin_checked="1"
-          >
-            <div
-              class="card-tape"
-              style="--rotate: -2deg"
-              bis_skin_checked="1"
-            ></div>
-            <img class="memory-img" src="2.jpeg" alt="Memory 9" />
-            <div class="memory-caption" bis_skin_checked="1">
-              You've always been there for me through thick and thin. I'm so
-              grateful for your friendship. ❤️
-            </div>
-            <div class="card-sticker" bis_skin_checked="1">
-              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="50" fill="#ff6ec4"></circle>
-                <text
-                  x="50"
-                  y="65"
-                  font-family="Arial"
-                  font-size="40"
-                  text-anchor="middle"
-                  fill="white"
-                >
-                  💕
-                </text>
-              </svg>
-            </div>
-          </div>
-          <div
-            class="memory-card visible"
-            style="--rotate: 3deg; animation-delay: 0.9s"
-            bis_skin_checked="1"
-          >
-            <div
-              class="card-tape"
-              style="--rotate: 6deg"
-              bis_skin_checked="1"
-            ></div>
-            <img class="memory-img" src="3.jpg" alt="Memory 10" />
-            <div class="memory-caption" bis_skin_checked="1">
-              Happy Birthday to my best friend in the whole world! Here's to
-              many more adventures together!
-            </div>
-            <div class="card-sticker" bis_skin_checked="1">
-              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="50" fill="#ff6ec4"></circle>
-                <text
-                  x="50"
-                  y="65"
-                  font-family="Arial"
-                  font-size="40"
-                  text-anchor="middle"
-                  fill="white"
-                >
-                  🎂
-                </text>
-              </svg>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -2551,7 +2350,7 @@
       // Memory data - replace placeholder images with your actual images and add your captions
       const memories = [
         {
-          image: "1.jpg",
+          image: "image/1.jpg",
           caption:
             "Remember when we got lost hiking and found that amazing waterfall? Best wrong turn ever! 😂",
           isGif: false,
@@ -2559,7 +2358,7 @@
           emoji: "🌊",
         },
         {
-          image: "2.jpeg",
+          image: "image/2.jpg",
           caption:
             "That time we stayed up all night just talking and watching the sunrise. I've never laughed so hard in my life!",
           isGif: false,
@@ -2567,7 +2366,7 @@
           emoji: "🌅",
         },
         {
-          image: "3.jpg",
+          image: "image/3.jpg",
           caption:
             "Our first road trip together! You fell asleep and I drew a tiny mustache on you with a marker. You didn't notice for HOURS!",
           isGif: true,
@@ -2575,7 +2374,7 @@
           emoji: "🚗",
         },
         {
-          image: "4.jpg",
+          image: "image/4.jpg",
           caption:
             "Remember our cooking disaster when we tried to make that fancy recipe? The smoke alarm going off, but the pizza we ordered after was the best ever!",
           isGif: false,
@@ -2583,7 +2382,7 @@
           emoji: "🍕",
         },
         {
-          image: "5.jpg",
+          image: "image/5.jpg",
           caption:
             "Our camping trip under the stars. You were terrified of that tiny spider and jumped so high! Still my favorite memory.",
           isGif: false,
@@ -2591,7 +2390,7 @@
           emoji: "🏕️",
         },
         {
-          image: "7.jpg",
+          image: "image/6.jpg",
           caption:
             "That concert where we danced until our feet hurt. Worth every blister!",
           isGif: true,
@@ -2599,7 +2398,7 @@
           emoji: "🎵",
         },
         {
-          image: "8.jpg",
+          image: "image/7.jpg",
           caption:
             "When we built that epic blanket fort during the storm and watched movies all day. Best rainy day ever!",
           isGif: false,
@@ -2607,7 +2406,7 @@
           emoji: "🏰",
         },
         {
-          image: "1.jpg",
+          image: "image/8.jpg",
           caption:
             "Our spontaneous beach day when we skipped class. I still find sand in my backpack sometimes!",
           isGif: false,
@@ -2615,7 +2414,7 @@
           emoji: "🏖️",
         },
         {
-          image: "2.jpeg",
+          image: "image/9.jpg",
           caption:
             "You've always been there for me through thick and thin. I'm so grateful for your friendship. ❤️",
           isGif: false,
@@ -2623,7 +2422,7 @@
           emoji: "💕",
         },
         {
-          image: "3.jpg",
+          image: "image/10.jpg",
           caption:
             "Happy Birthday to my best friend in the whole world! Here's to many more adventures together!",
           isGif: true,
@@ -2632,12 +2431,13 @@
         },
       ];
 
+
       // Create confetti elements
       function createConfetti() {
         const confettiContainer = document.getElementById("confetti-container");
         const colors = ["#ff6ec4", "#a485ff", "#ff4e91", "#c175ff", "#75c6ff"];
 
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 50; i++) {
           const confetti = document.createElement("div");
           confetti.className = "confetti-piece";
 
@@ -2664,7 +2464,129 @@
       document.addEventListener("DOMContentLoaded", function () {
         createConfetti();
 
+        // Move audio controls between Back and Next buttons
+        setTimeout(() => {
+          const navButtons = document.querySelector(".navigation-buttons");
+          const audioControls = document.querySelector(".audio-controls");
+          const nextBtn = document.getElementById("nextButton");
+          if (navButtons && audioControls && nextBtn) {
+            navButtons.insertBefore(audioControls, nextBtn);
+          }
+        }, 50);
+
         const galleryElement = document.getElementById("memoryGallery");
+
+        // Mouse drag to scroll functionality with linear interpolation (Lerp) & inertia
+        let isDown = false;
+        let isDragging = false; // Tracks if user is dragging or just clicking
+        let startX;
+        let scrollLeftStart;
+        let targetScrollLeft = 0;
+        let currentScrollLeft = 0;
+        let velocity = 0;
+        let lastX;
+        let lastTime;
+        let rafId;
+
+        // Smooth Lerp factor: 0.15 is highly responsive yet buttery smooth
+        const LERP_FACTOR = 0.15;
+
+        function updateScrollLoop() {
+          if (isDown) {
+            // Smoothly interpolate current scroll position toward target
+            currentScrollLeft += (targetScrollLeft - currentScrollLeft) * LERP_FACTOR;
+            galleryElement.scrollLeft = currentScrollLeft;
+            
+            rafId = requestAnimationFrame(updateScrollLoop);
+          } else {
+            // Momentum scroll once released
+            galleryElement.scrollLeft -= velocity;
+            velocity *= 0.95; // Friction
+
+            if (Math.abs(velocity) > 0.5) {
+              rafId = requestAnimationFrame(updateScrollLoop);
+            } else {
+              galleryElement.style.scrollBehavior = "smooth"; // Restore smooth scroll once stopped
+            }
+          }
+        }
+
+        galleryElement.addEventListener("mousedown", (e) => {
+          isDown = true;
+          isDragging = false; // Reset dragging state
+          galleryElement.classList.add("active");
+          
+          startX = e.pageX - galleryElement.offsetLeft;
+          scrollLeftStart = galleryElement.scrollLeft;
+          targetScrollLeft = scrollLeftStart;
+          currentScrollLeft = scrollLeftStart;
+          
+          galleryElement.style.scrollBehavior = "auto"; // Disable scroll smooth for instant response
+          galleryElement.style.scrollSnapType = "none";  // Temporary disable snap during mouse drag
+          
+          velocity = 0;
+          lastX = e.pageX;
+          lastTime = performance.now();
+          
+          cancelAnimationFrame(rafId);
+          // Start the render animation loop
+          rafId = requestAnimationFrame(updateScrollLoop);
+
+          // Auto-pause slideshow when user manually drags
+          if (typeof pauseSlideshow === "function") {
+            pauseSlideshow();
+          }
+        });
+
+        galleryElement.addEventListener("mouseleave", () => {
+          if (isDown) {
+            isDown = false;
+            galleryElement.classList.remove("active");
+            galleryElement.style.scrollSnapType = ""; // Restore snap
+            // The loop is already running, it will automatically switch to momentum phase
+          }
+        });
+
+        galleryElement.addEventListener("mouseup", () => {
+          if (isDown) {
+            isDown = false;
+            galleryElement.classList.remove("active");
+            galleryElement.style.scrollSnapType = ""; // Restore snap
+            // The loop is already running, it will automatically switch to momentum phase
+          }
+        });
+
+        galleryElement.addEventListener("mousemove", (e) => {
+          if (!isDown) return;
+          e.preventDefault(); // Prevent text selection and default scrolling
+          
+          const x = e.pageX - galleryElement.offsetLeft;
+          const walk = (x - startX) * 1.5; // Drag speed multiplier
+          
+          // Mark as dragging if moved more than 5px
+          if (Math.abs(x - startX) > 5) {
+            isDragging = true;
+          }
+          
+          // Update the target scroll position
+          targetScrollLeft = scrollLeftStart - walk;
+          
+          // Calculate velocity for momentum on release
+          const currentTime = performance.now();
+          const timeElapsed = currentTime - lastTime;
+          if (timeElapsed > 0) {
+            const distance = e.pageX - lastX;
+            velocity = (distance / timeElapsed) * 16.67; // Normalize velocity to 60fps
+          }
+          
+          lastX = e.pageX;
+          lastTime = currentTime;
+        });
+
+        // Prevent default browser image dragging inside the gallery
+        galleryElement.addEventListener("dragstart", (e) => {
+          e.preventDefault();
+        });
         const startSlideshowBtn = document.getElementById("startSlideshow");
         const pauseSlideshowBtn = document.getElementById("pauseSlideshow");
         const backButton = document.getElementById("backButton");
@@ -2693,6 +2615,10 @@
           imgElement.className = "memory-img";
           imgElement.src = memory.image;
           imgElement.alt = `Memory ${index + 1}`;
+          imgElement.decoding = "async";
+          if (index > 2) {
+            imgElement.loading = "lazy";
+          }
 
           const captionElement = document.createElement("div");
           captionElement.className = "memory-caption";
@@ -2700,8 +2626,9 @@
 
           const stickerElement = document.createElement("div");
           stickerElement.className = "card-sticker";
+          const stickerColor = index % 2 === 0 ? "#ff6ec4" : "#00d2ff";
           stickerElement.innerHTML = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="50" fill="#ff6ec4" />
+                    <circle cx="50" cy="50" r="50" fill="${stickerColor}" />
                     <text x="50" y="65" font-family="Arial" font-size="40" text-anchor="middle" fill="white">${memory.emoji}</text>
                 </svg>`;
 
@@ -2709,6 +2636,13 @@
           memoryCard.appendChild(imgElement);
           memoryCard.appendChild(captionElement);
           memoryCard.appendChild(stickerElement);
+          
+          // Click handler to open lightbox (only if not dragging)
+          memoryCard.addEventListener("click", () => {
+            if (isDragging) return;
+            openLightbox(index);
+          });
+          
           galleryElement.appendChild(memoryCard);
         });
 
@@ -2791,11 +2725,11 @@
 
         // Event listeners for navigation buttons
         backButton.addEventListener("click", function () {
-          window.location.href = "index.html"; // Adjust this to your welcome page URL
+          window.navigateToPage("gift.html");
         });
 
         nextButton.addEventListener("click", function () {
-          window.location.href = "cake.html"; // Adjust this to your next surprise page URL
+          window.navigateToPage("cake.html");
         });
 
         // Scroll animations with GSAP
@@ -2823,6 +2757,87 @@
             yoyo: true,
             ease: "sine.inOut",
           });
+        });
+
+        // Lightbox Zoom Logic
+        const lightboxModal = document.getElementById("lightboxModal");
+        const lightboxImg = document.getElementById("lightboxImg");
+        const lightboxCaption = document.getElementById("lightboxCaption");
+        const lightboxEmoji = document.getElementById("lightboxEmoji");
+        const lightboxClose = document.getElementById("lightboxClose");
+        const lightboxPrev = document.getElementById("lightboxPrev");
+        const lightboxNext = document.getElementById("lightboxNext");
+        let activeIndex = 0;
+
+        function openLightbox(index) {
+          activeIndex = index;
+          updateLightboxContent();
+          lightboxModal.classList.add("open");
+          
+          // Disable body scroll when modal is open
+          document.body.style.overflow = "hidden";
+          
+          // Auto-pause slideshow
+          if (typeof pauseSlideshow === "function") {
+            pauseSlideshow();
+          }
+        }
+
+        function closeLightbox() {
+          lightboxModal.classList.remove("open");
+          document.body.style.overflow = "";
+        }
+
+        function updateLightboxContent() {
+          const memory = memories[activeIndex];
+          lightboxImg.src = memory.image;
+          lightboxCaption.textContent = memory.caption;
+          lightboxEmoji.textContent = memory.emoji;
+        }
+
+        function showNextImage() {
+          activeIndex = (activeIndex + 1) % memories.length;
+          // GSAP Bounce Transition
+          gsap.fromTo(".lightbox-content", 
+            { scale: 0.9, opacity: 0.8 }, 
+            { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(1.5)" }
+          );
+          updateLightboxContent();
+        }
+
+        function showPrevImage() {
+          activeIndex = (activeIndex - 1 + memories.length) % memories.length;
+          // GSAP Bounce Transition
+          gsap.fromTo(".lightbox-content", 
+            { scale: 0.9, opacity: 0.8 }, 
+            { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(1.5)" }
+          );
+          updateLightboxContent();
+        }
+
+        // Click listeners to close
+        lightboxClose.addEventListener("click", closeLightbox);
+        lightboxModal.addEventListener("click", (e) => {
+          if (e.target === lightboxModal) {
+            closeLightbox();
+          }
+        });
+
+        // Navigation button click listeners
+        lightboxNext.addEventListener("click", showNextImage);
+        lightboxPrev.addEventListener("click", showPrevImage);
+
+        // Keyboard navigation (ESC to close, Left/Right arrows to switch)
+        document.addEventListener("keydown", (e) => {
+          if (lightboxModal.classList.contains("open")) {
+            if (e.key === "Escape") {
+              closeLightbox();
+            } else if (e.key === "ArrowRight") {
+              showNextImage();
+            } else if (e.key === "ArrowLeft") {
+              showPrevImage();
+            }
+          }
         });
 
         // Create hover effect for memory cards
@@ -2855,6 +2870,22 @@
       });
     </script>
 
+    <!-- Lightbox Modal for Photo Zooming -->
+    <div class="lightbox-modal" id="lightboxModal" bis_skin_checked="1">
+      <button class="lightbox-close" id="lightboxClose">&times;</button>
+      
+      <div class="lightbox-nav" bis_skin_checked="1">
+        <button class="lightbox-nav-btn" id="lightboxPrev">&#10094;</button>
+        <button class="lightbox-nav-btn" id="lightboxNext">&#10095;</button>
+      </div>
+
+      <div class="lightbox-content" bis_skin_checked="1">
+        <div class="lightbox-emoji" id="lightboxEmoji">🌊</div>
+        <img class="lightbox-img" id="lightboxImg" src="" alt="Zoomed Photo" />
+        <div class="lightbox-caption" id="lightboxCaption">Caption text here</div>
+      </div>
+    </div>
+
     <div
       id="loom-companion-mv3"
       ext-id="liecbddmkiiihnedobmlmillhodjkdmb"
@@ -2862,5 +2893,6 @@
     >
       <div id="shadow-host-companion" bis_skin_checked="1"></div>
     </div>
+    <script src="audio-helper.js"></script>
   </body>
 </html>

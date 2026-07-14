@@ -1,450 +1,467 @@
-<html lang="en"><script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/content/location/location.js" id="eppiocemhmnlbhjplcgkofciiegomcon"></script><script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/extend-native-history-api.js"></script><script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/requests.js"></script><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday My Gurl!</title>
+    <title>Happy Birthday, My Gurl! 🎉</title>
+    
+    <!-- External CSS / Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- External JS Libraries -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    
     <style>
-        * {
+        body {
+            background-color: #feecea;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-            height: 100vh;
-            overflow: hidden;
+            width: 100%;
+            height: 100%;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: relative;
+            overflow: hidden;
         }
 
-        .container {
-            text-align: center;
-            z-index: 10;
-            padding: 2rem;
-            max-width: 800px;
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 8px 32px rgba(255, 105, 180, 0.3);
-            transition: all 0.5s ease;
-        }
-
-        .container:hover {
-            box-shadow: 0 8px 32px rgba(255, 105, 180, 0.5);
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            color: #FF1493;
-            text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.8);
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            animation: bounce-in 1.5s forwards 0.5s;
-        }
-
-        .subtitle {
-            font-size: 1.8rem;
-            color: #8A2BE2;
-            margin-bottom: 2rem;
-            text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.6);
-            opacity: 0;
-        }
-
-        .next-button {
-            padding: 1rem 3rem;
-            font-size: 1.5rem;
-            background: linear-gradient(45deg, #FF1493, #8A2BE2);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.5);
-            transition: all 0.3s ease;
-            opacity: 0;
-            animation: fade-in 1s forwards 3s;
-        }
-
-        .next-button:hover {
-            transform: scale(1.05) translateY(-5px);
-            box-shadow: 0 6px 20px rgba(255, 20, 147, 0.7);
-            background: linear-gradient(45deg, #8A2BE2, #FF1493);
-        }
-
-        .audio-controls {
+        .lock-screen {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: rgba(255, 255, 255, 0.7);
-            padding: 10px;
-            border-radius: 50px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 60%, #e6ffff 100%);
             display: flex;
+            justify-content: center;
             align-items: center;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            transition: all 0.8s ease-in-out;
+            overflow-y: auto;
+            padding: 20px 10px;
+            box-sizing: border-box;
         }
 
-        .audio-controls button {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #FF1493;
-            margin-right: 10px;
+        .lock-box {
+            background: rgba(255, 255, 255, 0.75);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 5px solid white;
+            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.25);
+            transform: scale(1);
             transition: all 0.3s ease;
+            margin: auto;
         }
 
-        .audio-controls button:hover {
-            transform: scale(1.2);
-            color: #8A2BE2;
+        .lock-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: pulse-lock 2s infinite;
         }
 
-        .audio-controls input {
-            width: 100px;
+        @keyframes pulse-lock {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
         }
 
-        .confetti, .balloon, .heart, .star {
-            position: absolute;
+        .lock-box h2 {
+            font-size: 2.2rem;
+            color: #0072ff;
+            margin-bottom: 1rem;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .lock-box p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        /* Passcode dots */
+        .passcode-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .passcode-dots .dot {
             width: 20px;
             height: 20px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            z-index: 1;
-            opacity: 0.8;
-            pointer-events: none;
+            border-radius: 50%;
+            border: 2px solid #00d2ff;
+            background: white;
+            transition: all 0.2s ease;
         }
 
-        .balloon {
-            width: 40px;
-            height: 50px;
+        .passcode-dots .dot.filled {
+            background: #ff6ec4;
+            border-color: #ff6ec4;
+            transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(255, 110, 196, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        
+        .passcode-dots .dot.filled::before {
+            content: "❤️";
         }
 
-        .heart {
-            width: 25px;
-            height: 25px;
-        }
-
-        .star {
-            width: 15px;
-            height: 15px;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0) rotate(0deg);
-            }
-            50% {
-                transform: translateY(-20px) rotate(10deg);
-            }
-            100% {
-                transform: translateY(0) rotate(0deg);
-            }
-        }
-
-        @keyframes sway {
-            0% {
-                transform: translateX(0);
-            }
-            50% {
-                transform: translateX(20px);
-            }
-            100% {
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes sparkle {
-            0%, 100% {
-                opacity: 0.4;
-            }
-            50% {
-                opacity: 1;
-                filter: drop-shadow(0 0 5px white);
-            }
-        }
-
-        @keyframes bounce-in {
-            0% {
-                transform: scale(0);
-                opacity: 0;
-            }
-            60% {
-                transform: scale(1.1);
-                opacity: 1;
-            }
-            80% {
-                transform: scale(0.9);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        @keyframes fade-in {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes typewriter {
-            from {
-                width: 0;
-            }
-            to {
-                width: 100%;
-            }
-        }
-
-        .typewriter-container {
-            display: inline-block;
+        /* Keypad grid */
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            width: 100%;
+            max-width: 320px;
             margin: 0 auto;
-            position: relative;
-            max-width: 100%;
-            overflow: hidden;
-            height: 2.5rem;
         }
 
-        .typewriter-text {
-            position: relative;
-            white-space: nowrap;
-            overflow: hidden;
-            width: 0;
-            animation: typewriter 3s steps(50) forwards 1.5s;
+        .key-btn {
+            background: white;
+            border: 2px solid #e6f7ff;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s ease;
+            outline: none;
+            margin: 0 auto;
         }
 
-        .cursor {
-            position: absolute;
-            right: -5px;
-            width: 3px;
-            height: 100%;
-            background-color: #8A2BE2;
-            animation: blink 0.8s infinite;
+        .key-btn:hover {
+            transform: scale(1.1);
+            background: #e6f7ff;
+            border-color: #00d2ff;
+            color: #0072ff;
+            box-shadow: 0 6px 15px rgba(0, 210, 255, 0.2);
         }
 
-        @keyframes blink {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0;
-            }
+        .key-btn:active {
+            transform: scale(0.95);
         }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
+        .special-btn {
+            font-size: 1.4rem;
+            background: #f5f5f5;
+            color: #555;
+            border-color: #eee;
+        }
+
+        .special-btn:hover {
+            background: #eee;
+            color: #333;
+            border-color: #ddd;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .check-btn {
+            background: linear-gradient(45deg, #00d2ff, #0072ff);
+            color: white;
+            border: none;
+        }
+
+        .check-btn:hover {
+            background: linear-gradient(45deg, #0072ff, #00d2ff);
+            color: white;
+            box-shadow: 0 6px 15px rgba(0, 114, 255, 0.4);
+        }
+
+        .error-msg {
+            margin-top: 1.5rem;
+            color: #ff3366;
+            font-size: 1rem;
+            min-height: 24px;
+            font-weight: bold;
+            line-height: 1.4;
+        }
+
+        /* Shake animation */
+        .shake {
+            animation: shake-box 0.5s ease-in-out;
+        }
+
+        @keyframes shake-box {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
+        }
+
+        /* Responsive Design for Samsung S26 Ultra, Mobile Devices & Shorter Screens */
+        @media (max-width: 480px) or (max-height: 800px) {
+            .lock-box {
+                padding: 2rem 1.5rem;
+                border-radius: 16px;
+                border-width: 4px;
+                box-shadow: 0 10px 25px rgba(255, 105, 180, 0.2);
             }
-            .subtitle {
-                font-size: 1.3rem;
+
+            .lock-icon {
+                font-size: 3rem;
+                margin-bottom: 0.5rem;
             }
-            .container {
-                width: 90%;
-                padding: 1.5rem;
+
+            .lock-box h2 {
+                font-size: 1.8rem;
+                margin-bottom: 0.5rem;
             }
-            .next-button {
-                padding: 0.8rem 2rem;
+
+            .lock-box p {
+                font-size: 0.95rem;
+                margin-bottom: 1rem;
+                line-height: 1.4;
+            }
+
+            .passcode-dots {
+                gap: 8px;
+                margin-bottom: 1.5rem;
+            }
+
+            .passcode-dots .dot {
+                width: 16px;
+                height: 16px;
+                border-width: 1.5px;
+            }
+
+            .passcode-dots .dot.filled {
+                font-size: 10px;
+            }
+
+            .keypad {
+                gap: 12px;
+                max-width: 280px;
+            }
+
+            .key-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 1.4rem;
+                border-width: 1.5px;
+            }
+
+            .special-btn {
                 font-size: 1.2rem;
             }
-            .audio-controls {
-                bottom: 10px;
-                right: 10px;
+
+            .error-msg {
+                margin-top: 1rem;
+                font-size: 0.9rem;
+                min-height: 20px;
+            }
+        }
+
+        /* Extra small height screen adjustments (e.g. landscape mode or tiny viewports) */
+        @media (max-height: 600px) {
+            .lock-box {
+                padding: 1.25rem 1rem;
+            }
+
+            .lock-icon {
+                font-size: 2.2rem;
+                margin-bottom: 0.25rem;
+            }
+
+            .lock-box h2 {
+                font-size: 1.5rem;
+                margin-bottom: 0.25rem;
+            }
+
+            .lock-box p {
+                font-size: 0.85rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .passcode-dots {
+                gap: 6px;
+                margin-bottom: 1rem;
+            }
+
+            .passcode-dots .dot {
+                width: 12px;
+                height: 12px;
+            }
+
+            .passcode-dots .dot.filled {
+                font-size: 8px;
+            }
+
+            .keypad {
+                gap: 8px;
+                max-width: 240px;
+            }
+
+            .key-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .special-btn {
+                font-size: 1rem;
+            }
+
+            .error-msg {
+                margin-top: 0.5rem;
+                font-size: 0.8rem;
+                min-height: 16px;
             }
         }
     </style>
-<script bis_use="true" type="text/javascript" charset="utf-8" data-bis-config="[&quot;facebook.com/&quot;,&quot;twitter.com/&quot;,&quot;youtube-nocookie.com/embed/&quot;,&quot;//vk.com/&quot;,&quot;//www.vk.com/&quot;,&quot;linkedin.com/&quot;,&quot;//www.linkedin.com/&quot;,&quot;//instagram.com/&quot;,&quot;//www.instagram.com/&quot;,&quot;//www.google.com/recaptcha/api2/&quot;,&quot;//hangouts.google.com/webchat/&quot;,&quot;//www.google.com/calendar/&quot;,&quot;//www.google.com/maps/embed&quot;,&quot;spotify.com/&quot;,&quot;soundcloud.com/&quot;,&quot;//player.vimeo.com/&quot;,&quot;//disqus.com/&quot;,&quot;//tgwidget.com/&quot;,&quot;//js.driftt.com/&quot;,&quot;friends2follow.com&quot;,&quot;/widget&quot;,&quot;login&quot;,&quot;//video.bigmir.net/&quot;,&quot;blogger.com&quot;,&quot;//smartlock.google.com/&quot;,&quot;//keep.google.com/&quot;,&quot;/web.tolstoycomments.com/&quot;,&quot;moz-extension://&quot;,&quot;chrome-extension://&quot;,&quot;/auth/&quot;,&quot;//analytics.google.com/&quot;,&quot;adclarity.com&quot;,&quot;paddle.com/checkout&quot;,&quot;hcaptcha.com&quot;,&quot;recaptcha.net&quot;,&quot;2captcha.com&quot;,&quot;accounts.google.com&quot;,&quot;www.google.com/shopping/customerreviews&quot;,&quot;buy.tinypass.com&quot;,&quot;gstatic.com&quot;,&quot;secureir.ebaystatic.com&quot;,&quot;docs.google.com&quot;,&quot;contacts.google.com&quot;,&quot;github.com&quot;,&quot;mail.google.com&quot;,&quot;chat.google.com&quot;,&quot;audio.xpleer.com&quot;,&quot;keepa.com&quot;,&quot;static.xx.fbcdn.net&quot;,&quot;sas.selleramp.com&quot;,&quot;1plus1.video&quot;,&quot;console.googletagservices.com&quot;,&quot;//lnkd.demdex.net/&quot;,&quot;//radar.cedexis.com/&quot;,&quot;//li.protechts.net/&quot;,&quot;challenges.cloudflare.com/&quot;,&quot;ogs.google.com&quot;]" src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/executors/traffic.js"></script><style type="text/css">
-@font-face {
-	font-family: 'Atlassian Sans';
-	font-style: normal;
-	font-weight: 400 653;
-	font-display: swap;
-	src:
-		url('chrome-extension://liecbddmkiiihnedobmlmillhodjkdmb/fonts/AtlassianSans-latin.woff2') format('woff2');
-	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
-		U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}</style></head>
-<body bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWllZ29tY29uIiwiYWRibG9ja2VyU3RhdHVzIjp7IkRJU1BMQVkiOiJkaXNhYmxlZCIsIkZBQ0VCT09LIjoiZGlzYWJsZWQiLCJUV0lUVEVSIjoiZGlzYWJsZWQiLCJSRURESVQiOiJkaXNhYmxlZCIsIlBJTlRFUkVTVCI6ImRpc2FibGVkIiwiSU5TVEFHUkFNIjoiZGlzYWJsZWQiLCJMSU5LRURJTiI6ImRpc2FibGVkIiwiQ09ORklHIjoiZGlzYWJsZWQifSwidmVyc2lvbiI6IjIuMC4yMiIsInNjb3JlIjoyMDAyMn1d" __processed_0f899d02-c977-4ac2-8af0-0af2181c0594__="true" data-new-gr-c-s-check-loaded="14.1235.0" data-gr-ext-installed="">
-    <div class="container" bis_skin_checked="1">
-        <h1 style="text-shadow: rgb(255, 255, 255) 0px 0px 10px, rgba(255, 255, 255, 0.8) 0px 0px 20px, rgba(255, 20, 147, 0.6) 0px 0px 30px;">Happy Birthday, </br>My Gurl! </br>🎉🎂</h1>
-        <div class="typewriter-container" bis_skin_checked="1">
-            <div class="subtitle typewriter-text" bis_skin_checked="1">
-                Hey Bestie! Ready for your special surprise? Click to continue!
-                <span class="cursor"></span>
+</head>
+<body>
+    <!-- Passcode Lock Screen Overlay -->
+    <div class="lock-screen" id="lockScreen">
+        <div class="lock-box">
+            <div class="lock-icon" id="lockIcon">🔒</div>
+            <h2>Unlock Your Surprise! 🎁</h2>
+            <p>Please enter your passcode (birthdate) to reveal the magic:</p>
+            
+            <div class="passcode-dots" id="passcodeDots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
             </div>
+
+            <div class="keypad">
+                <button class="key-btn" onclick="pressKey('1')">1</button>
+                <button class="key-btn" onclick="pressKey('2')">2</button>
+                <button class="key-btn" onclick="pressKey('3')">3</button>
+                <button class="key-btn" onclick="pressKey('4')">4</button>
+                <button class="key-btn" onclick="pressKey('5')">5</button>
+                <button class="key-btn" onclick="pressKey('6')">6</button>
+                <button class="key-btn" onclick="pressKey('7')">7</button>
+                <button class="key-btn" onclick="pressKey('8')">8</button>
+                <button class="key-btn" onclick="pressKey('9')">9</button>
+                <button class="key-btn special-btn" onclick="pressKey('delete')">⌫</button>
+                <button class="key-btn" onclick="pressKey('0')">0</button>
+                <button class="key-btn special-btn check-btn" onclick="pressKey('submit')">✨</button>
+            </div>
+            
+            <div class="error-msg" id="errorMsg"></div>
         </div>
-        <button class="next-button" onclick="goToNextPage()">Let's Go! ✨</button>
     </div>
 
-    <div class="audio-controls" bis_skin_checked="1">
-        <button id="play-pause"><i class="play-icon">▶️</i></button>
-        <input type="range" id="volume" min="0" max="1" step="0.1" value="0.5">
-    </div>
-
-    <audio id="birthday-song" loop="">
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
-        Your browser does not support the audio element.
-    </audio>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <!-- Scripts -->
+    <script src="transition-helper.js"></script>
+    <script src="audio-helper.js"></script>
     <script>
-        // Play birthday song
-        const audio = document.getElementById('birthday-song');
-        const playPauseBtn = document.getElementById('play-pause');
-        const volumeControl = document.getElementById('volume');
-        let isPlaying = false;
+        // Passcode keypad verification logic
+        let enteredPasscode = "";
+        const PASSCODE_LIMIT = 8;
+        const TARGET_PASSCODE = "23072003";
 
-        // Set initial volume
-        audio.volume = volumeControl.value;
-
-        // Play audio when page loads but wait a bit
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                audio.play()
-                    .then(() => {
-                        isPlaying = true;
-                        playPauseBtn.innerHTML = '<i class="play-icon">⏸️</i>';
-                    })
-                    .catch(error => {
-                        console.log("Audio play failed due to autoplay restrictions:", error);
-                    });
-            }, 1000);
-        });
-
-        // Play/Pause button
-        playPauseBtn.addEventListener('click', () => {
-            if (isPlaying) {
-                audio.pause();
-                playPauseBtn.innerHTML = '<i class="play-icon">▶️</i>';
-            } else {
-                audio.play();
-                playPauseBtn.innerHTML = '<i class="play-icon">⏸️</i>';
-            }
-            isPlaying = !isPlaying;
-        });
-
-        // Volume control
-        volumeControl.addEventListener('input', () => {
-            audio.volume = volumeControl.value;
-        });
-
-        // Function to go to next page
-        function goToNextPage() {
-            // Add a bounce effect before navigating
-            gsap.to('.next-button', {
-                scale: 1.2,
-                yoyo: true,
-                repeat: 1,
-                duration: 0.3,
-                onComplete: () => {
-                    // Change this URL to your next page
-                    window.location.href = "memorylane.html";
-                    
-                    // For demonstration, we'll just show an alert
-                    
+        function updateDots() {
+            const dots = document.querySelectorAll(".passcode-dots .dot");
+            dots.forEach((dot, index) => {
+                if (index < enteredPasscode.length) {
+                    dot.classList.add("filled");
+                } else {
+                    dot.classList.remove("filled");
                 }
             });
         }
 
-        // Create confetti, balloons, hearts, and stars
-        function createFloatingElements() {
-            const colors = ['#FF1493', '#8A2BE2', '#FFD700', '#FF4500', '#00BFFF', '#32CD32'];
-            const elements = ['confetti', 'balloon', 'heart', 'star'];
-            const confettiShapes = ['▲', '■', '●', '★', '♥', '♦', '✦', '✧'];
-            
-            for (let i = 0; i < 100; i++) {
-                setTimeout(() => {
-                    const element = document.createElement('div');
+        function pressKey(key) {
+            const errorMsg = document.getElementById("errorMsg");
+            if (key === "delete") {
+                if (enteredPasscode.length > 0) {
+                    enteredPasscode = enteredPasscode.slice(0, -1);
+                    updateDots();
+                    errorMsg.textContent = "";
+                }
+            } else if (key === "submit") {
+                verifyPasscode();
+            } else {
+                if (enteredPasscode.length < PASSCODE_LIMIT) {
+                    enteredPasscode += key;
+                    updateDots();
+                    errorMsg.textContent = "";
                     
-                    // Randomly pick an element type
-                    const elementType = elements[Math.floor(Math.random() * elements.length)];
-                    element.className = elementType;
-                    
-                    // Set random position
-                    element.style.left = Math.random() * 100 + 'vw';
-                    element.style.top = -30 + 'px';
-                    
-                    // Set random color
-                    const color = colors[Math.floor(Math.random() * colors.length)];
-                    
-                    // Different styling based on element type
-                    if (elementType === 'confetti') {
-                        const shape = confettiShapes[Math.floor(Math.random() * confettiShapes.length)];
-                        element.innerHTML = shape;
-                        element.style.color = color;
-                        element.style.fontSize = (Math.random() * 20 + 10) + 'px';
-                        element.style.transform = `rotate(${Math.random() * 360}deg)`;
-                    } else if (elementType === 'balloon') {
-                        element.innerHTML = '🎈';
-                        element.style.fontSize = (Math.random() * 30 + 20) + 'px';
-                        element.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
-                    } else if (elementType === 'heart') {
-                        element.innerHTML = '❤️';
-                        element.style.fontSize = (Math.random() * 20 + 10) + 'px';
-                        element.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
-                    } else if (elementType === 'star') {
-                        element.innerHTML = '✨';
-                        element.style.fontSize = (Math.random() * 15 + 10) + 'px';
+                    if (enteredPasscode.length === PASSCODE_LIMIT) {
+                        setTimeout(verifyPasscode, 300);
                     }
-                    
-                    // Add to body
-                    document.body.appendChild(element);
-                    
-                    // Animate with GSAP
-                    gsap.to(element, {
-                        y: window.innerHeight + 100,
-                        x: '+=' + (Math.random() * 200 - 100),
-                        rotation: Math.random() * 360,
-                        duration: Math.random() * 10 + 5,
-                        ease: "power1.out",
-                        onComplete: () => {
-                            document.body.removeChild(element);
-                        }
-                    });
-                    
-                    // Add some sparkle animation
-                    if (Math.random() > 0.7) {
-                        gsap.to(element, {
-                            opacity: 0.5,
-                            yoyo: true,
-                            repeat: -1,
-                            duration: 0.5,
-                            ease: "sine.inOut"
-                        });
-                    }
-                    
-                }, i * 200); // Staggered start times
+                }
             }
         }
 
-        // Start floating elements on load
-        window.addEventListener('load', createFloatingElements);
-        
-        // Create new elements periodically
-        setInterval(createFloatingElements, 5000);
-        
-        // Add a subtle sparkle effect to the heading
-        gsap.to('h1', {
-            textShadow: "0 0 10px rgba(255, 255, 255, 1), 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 20, 147, 0.6)",
-            repeat: -1,
-            yoyo: true,
-            duration: 2
-        });
-        
-        // Responsive adjustments
-        function handleResize() {
-            // Add responsive adjustments if needed
+        function verifyPasscode() {
+            const lockBox = document.querySelector(".lock-box");
+            const errorMsg = document.getElementById("errorMsg");
+            const lockScreen = document.getElementById("lockScreen");
+            const lockIcon = document.getElementById("lockIcon");
+
+            if (enteredPasscode.length === 0) {
+                errorMsg.textContent = "Nhập ngày sinh của bestie vào nhé! 💕";
+                return;
+            }
+
+            if (enteredPasscode === TARGET_PASSCODE) {
+                lockIcon.textContent = "🔓";
+                errorMsg.style.color = "#32CD32";
+                errorMsg.textContent = "Chính xác! Đang chuyển tiếp... ✨";
+                
+                if (window.playBirthdayAudio) {
+                    window.playBirthdayAudio();
+                }
+
+                gsap.to(lockScreen, {
+                    opacity: 0,
+                    duration: 1.2,
+                    ease: "power2.out",
+                    onComplete: () => {
+                        if (window.navigateToPage) {
+                            window.navigateToPage("gift.html");
+                        } else {
+                            window.location.href = "gift.html";
+                        }
+                    }
+                });
+            } else {
+                lockBox.classList.add("shake");
+                errorMsg.textContent = "Ơ kìa bestie, ngày sinh của mình mà cũng quên sao? 😢 (Gợi ý: Ngày đẹp nhất năm 2003 đó! 😉)";
+                enteredPasscode = "";
+                updateDots();
+                
+                setTimeout(() => {
+                    lockBox.classList.remove("shake");
+                }, 500);
+            }
         }
-        
-        window.addEventListener('resize', handleResize);
-        handleResize();
+
+        document.addEventListener("keydown", (e) => {
+            const lockScreen = document.getElementById("lockScreen");
+            if (lockScreen && lockScreen.style.display !== "none") {
+                if (e.key >= "0" && e.key <= "9") {
+                    pressKey(e.key);
+                } else if (e.key === "Backspace") {
+                    pressKey("delete");
+                } else if (e.key === "Enter") {
+                    pressKey("submit");
+                }
+            }
+        });
     </script>
-</body></html>
+</body>
+</html>

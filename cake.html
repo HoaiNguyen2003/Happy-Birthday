@@ -352,28 +352,33 @@
         z-index: 50;
       }
 
+      /* Move audio controls higher to avoid overlapping with next button */
+      .audio-controls {
+        bottom: 110px !important;
+      }
+
       .btn {
         padding: 12px 24px;
-        background: linear-gradient(to right, #ff85a2, #ff3366);
+        background: linear-gradient(to right, #00d2ff, #0072ff);
         color: white;
         border: none;
         border-radius: 30px;
         cursor: pointer;
         font-size: 16px;
         font-weight: 600;
-        box-shadow: 0 5px 15px rgba(255, 51, 102, 0.4);
+        box-shadow: 0 5px 15px rgba(0, 114, 255, 0.4);
         transition: all 0.3s ease;
         outline: none;
       }
 
       .btn:hover {
         transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(255, 51, 102, 0.6);
+        box-shadow: 0 8px 20px rgba(0, 114, 255, 0.6);
       }
 
       .btn:active {
         transform: translateY(-1px);
-        box-shadow: 0 5px 10px rgba(255, 51, 102, 0.4);
+        box-shadow: 0 5px 10px rgba(0, 114, 255, 0.4);
       }
 
       /* Improved Responsive Design */
@@ -526,6 +531,7 @@
           U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
       }
     </style>
+    <script src="transition-helper.js"></script>
   </head>
   <body
     __processed_7adb44bb-c731-4b39-a819-dea3d74cf4d5__="true"
@@ -742,7 +748,7 @@
 
       // Create floating balloons
       function createBalloons() {
-        const colors = ["#ff66b3", "#66ccff", "#ff9966", "#99ff66", "#cc99ff"];
+        const colors = ["#ff66b3", "#66FFFF", "#ff9966", "#99ff66", "#cc99ff"];
         const numBalloons = 15;
 
         for (let i = 0; i < numBalloons; i++) {
@@ -779,7 +785,7 @@
       // Create cake decorations
       function createDecorations() {
         const cake = document.querySelector(".cake");
-        const colors = ["#ff3366", "#ffcc00", "#66ccff", "#ff9966", "#99ff66"];
+        const colors = ["#ff3366", "#ffcc00", "#66FFFF", "#ff9966", "#99ff66"];
         const numDecorations = 10;
 
         for (let i = 0; i < numDecorations; i++) {
@@ -862,7 +868,7 @@
       // Create fireworks effect
       function createFireworks() {
         const numFireworks = 10;
-        const colors = ["#ff3366", "#ffcc00", "#66ccff", "#ff9966", "#99ff66"];
+        const colors = ["#ff3366", "#ffcc00", "#66FFFF", "#ff9966", "#99ff66"];
 
         for (let i = 0; i < numFireworks; i++) {
           setTimeout(() => {
@@ -889,15 +895,16 @@
       function goBack() {
         // Replace with actual back URL
 
-        window.location.href = "memorylane.html";
+        window.navigateToPage("memorylane.html");
       }
 
       function goNext() {
         // Replace with actual next URL
 
-        window.location.href = "letter.html";
+        window.navigateToPage("letter.html");
       }
     </script>
 
+    <script src="audio-helper.js"></script>
     </body>
 </html>
