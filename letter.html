@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Special Surprise For You ✨</title>
+    <title>Điều Bất Ngờ Đặc Biệt Dành Cho Cậu ✨</title>
     <style>
         /* Base Styles */
         * {
@@ -510,7 +510,7 @@
 <body>
     <div class="container">
         <header>
-            <h1>For My Dearest Friend ❤️</h1>
+            <h1>Gửi Người Bạn Thân Nhất Của Tớ ❤️</h1>
         </header>
 
         <div class="letter-container">
@@ -524,13 +524,13 @@
 
         <div class="surprise-button-container">
             <button class="surprise-button" id="surprise-button">
-                Click for a Surprise! 🎁
+                Nhấn để nhận Điều bất ngờ! 🎁
             </button>
         </div>
 
         <div class="navigation">
             <a onclick="window.navigateToPage('cake.html')" class="back-button" style="cursor: pointer;">
-                <i class="fas fa-arrow-left"></i> Back to Birthday Cake
+                <i class="fas fa-arrow-left"></i> Quay lại trang Bánh kem
             </a>
         </div>
     </div>
@@ -540,11 +540,11 @@
         <div class="modal">
             <button class="modal-close" id="modal-close">×</button>
             <div class="modal-header">
-                <h2>🎉 Your Special Surprise! 🎉</h2>
+                <h2>🎉 Món Quà Bất Ngờ Dành Cho Cậu! 🎉</h2>
             </div>
             <div class="modal-body">
                 <div class="playlist">
-                    <h3 style="margin-bottom: 15px;">Songs That Remind Me of Us 💕</h3>
+                    <h3 style="margin-bottom: 15px;">Những bài hát gợi nhớ về chúng mình 💕</h3>
                     <div class="playlist-item">
                         <img src="3.jpg" alt="Song cover">
                         <div class="playlist-item-info">
@@ -591,8 +591,8 @@
                 <div class="mini-player" id="mini-player">
                     <div class="player-info">
                         <div class="player-title-artist">
-                            <div class="player-song-title" id="player-song-title">Song Title</div>
-                            <div class="player-song-artist" id="player-song-artist">Artist</div>
+                            <div class="player-song-title" id="player-song-title">Tên bài hát</div>
+                            <div class="player-song-artist" id="player-song-artist">Nghệ sĩ</div>
                         </div>
                     </div>
                     
@@ -614,7 +614,7 @@
 
                 <div style="margin-top: 20px;">
                     <a href="#" download class="back-button" style="background: #ffb6c1; border-color: #ffb6c1; color: white;">
-                        <i class="fas fa-download"></i> Download Your Digital Gift
+                        <i class="fas fa-download"></i> Tải về Món quà Kỹ thuật số
                     </a>
                 </div>
             </div>
@@ -637,7 +637,7 @@
             }, 500);
 
             // Typewriter effect for letter
-            const letterContent = "My dearest friend,\n\nAs I sit here thinking about all our memories together, I can't help but smile. From our late-night talks to our spontaneous adventures, you've filled my life with so much joy and laughter. You've been my shoulder to cry on, my partner in crime, and my biggest supporter.\n\nOn your special day, I want you to know how grateful I am to have you in my life. You make every day brighter just by being you - kind, funny, and incredibly thoughtful.\n\nHappy Birthday to my favorite person in the world! Here's to many more years of friendship, laughter, and creating memories together.\n\nWith all my love,\n[Your Name]";
+            const letterContent = "Hương Vy thân mến,\n\nMỗi khi tớ ngồi nghĩ về những kỷ niệm chúng mình đã có cùng nhau, tớ lại không kìm được nụ cười. Từ những buổi trò chuyện thâu đêm suốt sáng đến những chuyến phiêu lưu đầy ngẫu hứng, cậu đã lấp đầy cuộc sống của tớ bằng rất nhiều niềm vui và tiếng cười. Cậu luôn là bờ vai để tớ tựa vào khi buồn, là đồng phạm trong mọi trò nghịch ngợm, và là người ủng hộ tớ hết mình.\n\nTrong ngày đặc biệt này, tớ muốn cậu biết tớ trân trọng và biết ơn sự hiện diện của cậu trong cuộc đời tớ đến nhường nào. Cậu làm cho mỗi ngày trở nên tươi sáng hơn chỉ đơn giản bằng việc là chính cậu - một cô gái tử tế, vui tính và cực kỳ chu đáo.\n\nChúc mừng sinh nhật người mà tớ yêu quý nhất trên đời! Chúc cho tình bạn của hai đứa mình luôn bền chặt, chúc cho chúng mình có thêm thật nhiều năm tháng ngập tràn tiếng cười và cùng nhau tạo nên nhiều kỷ niệm đẹp hơn nữa nhé.\n\nThương cậu thật nhiều,\nBestie của cậu";
             
             new Typed('#typed-text', {
                 strings: [letterContent],
@@ -816,6 +816,9 @@
                 miniPlayer.classList.remove('active');
                 currentPlayingIndex = -1;
                 updatePlayButtonsUI();
+                if (window.playBirthdayAudio) {
+                    window.playBirthdayAudio();
+                }
             }
 
             // Pause audio when modal is closed
