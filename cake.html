@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chiếc Bánh Sinh Nhật Kỳ Diệu</title>
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600;700&display=swap");
+
       /* Global Styles */
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial,
-          sans-serif;
+        font-family: "Poppins", Arial, sans-serif;
       }
 
       body {
@@ -65,6 +66,45 @@
         100% {
           transform: translateY(100vh) rotate(720deg);
           opacity: 0;
+        }
+      }
+
+      /* Instruction Text */
+      .instruction-text {
+        text-align: center;
+        margin: 25px auto 10px;
+        font-family: 'Dancing Script', cursive;
+        font-size: 2.3rem;
+        font-weight: 700;
+        background: linear-gradient(45deg, #ff3385, #9b5de5, #0077ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.4);
+        z-index: 20;
+        position: relative;
+        max-width: 90%;
+        animation: pulseText 2.5s ease-in-out infinite;
+      }
+      .instruction-text .hint {
+        font-family: "Poppins", Arial, sans-serif;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #555;
+        -webkit-text-fill-color: initial;
+        background: none;
+        display: block;
+        margin-top: 6px;
+        font-style: italic;
+        text-shadow: none;
+      }
+
+      @keyframes pulseText {
+        0%, 100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.03);
         }
       }
 
@@ -296,13 +336,14 @@
 
       .wish-message h2 {
         color: #ff3366;
-        font-size: 28px;
+        font-size: 26px;
         margin-bottom: 15px;
         text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
         background: linear-gradient(45deg, #ff3366, #ff66b3);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
+        white-space: nowrap;
       }
 
       .wish-message p {
@@ -365,7 +406,8 @@
         border-radius: 30px;
         cursor: pointer;
         font-size: 16px;
-        font-weight: 600;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
         box-shadow: 0 5px 15px rgba(0, 114, 255, 0.4);
         transition: all 0.3s ease;
         outline: none;
@@ -444,7 +486,7 @@
         }
 
         .wish-message h2 {
-          font-size: 22px;
+          font-size: 20px;
           margin-bottom: 10px;
         }
 
@@ -487,7 +529,7 @@
         }
 
         .wish-message h2 {
-          font-size: 20px;
+          font-size: 17px;
         }
 
         .wish-message p {
@@ -541,32 +583,17 @@
   >
     <!-- Balloons and Confetti will be added by JavaScript -->
 
+    <!-- Instruction Text -->
+    <div class="instruction-text">
+      Ước một điều ước rồi thổi nến nhé 💫
+      <span class="hint">(Gợi ý nhỏ xíu: di chuột qua hoặc vuốt màn hình qua từng cây nến nhé!)</span>
+    </div>
+
     <!-- Birthday Cake -->
     <div class="cake-container" bis_skin_checked="1">
       <div class="cake" bis_skin_checked="1">
         <!-- Candles will be added by JavaScript -->
-        <div class="candle-container" id="candleContainer" bis_skin_checked="1">
-          <div class="candle" bis_skin_checked="1">
-            <div class="flame" bis_skin_checked="1"></div>
-            <div class="smoke" bis_skin_checked="1"></div>
-          </div>
-          <div class="candle" bis_skin_checked="1">
-            <div class="flame" bis_skin_checked="1"></div>
-            <div class="smoke" bis_skin_checked="1"></div>
-          </div>
-          <div class="candle" bis_skin_checked="1">
-            <div class="flame" bis_skin_checked="1"></div>
-            <div class="smoke" bis_skin_checked="1"></div>
-          </div>
-          <div class="candle" bis_skin_checked="1">
-            <div class="flame" bis_skin_checked="1"></div>
-            <div class="smoke" bis_skin_checked="1"></div>
-          </div>
-          <div class="candle" bis_skin_checked="1">
-            <div class="flame" bis_skin_checked="1"></div>
-            <div class="smoke" bis_skin_checked="1"></div>
-          </div>
-        </div>
+        <div class="candle-container" id="candleContainer" bis_skin_checked="1"></div>
 
         <!-- Frosting & Decorations -->
         <div class="frosting" bis_skin_checked="1"></div>
@@ -665,15 +692,15 @@
 
     <!-- Enhanced Wish Message Popup -->
     <div class="wish-message" id="wishMessage" bis_skin_checked="1">
-      <h2>✨ Chúc mừng Sinh nhật! ✨</h2>
-      <p>Ước một điều ước đi nào Bestie! Chúc mọi điều ước của cậu đều thành hiện thực! 🎂✨</p>
+      <h2>✨ Chúc mừng <span style="white-space: nowrap;">sinh nhật! ✨</span></h2>
+      <p>Điều ước chắc chắn sẽ được thực hiện!!! 🎂✨</p>
       <button class="btn" onclick="closeWishMessage()">Cảm ơn cậu! ❤️</button>
     </div>
 
     <!-- Navigation Buttons -->
     <div class="nav-buttons" bis_skin_checked="1">
-      <button class="btn" onclick="goBack()">◀ Quay lại Trang kỷ niệm</button>
-      <button class="btn" onclick="goNext()">Trang bất ngờ kế tiếp ▶</button>
+      <button class="btn" onclick="goBack()">◀ Quay lại coi ảnh chút</button>
+      <button class="btn" onclick="goNext()">Tiếp thui ▶</button>
     </div>
 
     <script>
@@ -692,7 +719,6 @@
         // Add event listeners for candle interaction
         document.querySelectorAll(".candle").forEach((candle) => {
           candle.addEventListener("click", blowOutCandle);
-          candle.addEventListener("touchstart", blowOutCandle); // Better for mobile
           candle.addEventListener("mouseover", function (e) {
             if (e.buttons === 0) {
               // Only trigger on hover when not clicking
@@ -701,21 +727,24 @@
           });
         });
 
-        // For better mobile experience with touch
-        document.addEventListener("touchmove", function (e) {
+        // For better mobile experience with touch (swipe & tap over candles/flames)
+        const handleTouch = function (e) {
           const touch = e.touches[0];
           const element = document.elementFromPoint(
             touch.clientX,
             touch.clientY
           );
-          if (
-            element &&
-            element.classList.contains("candle") &&
-            !element.classList.contains("blown")
-          ) {
-            blowOutCandle.call(element);
+          if (element) {
+            const candle = element.closest(".candle");
+            if (candle && !candle.classList.contains("blown")) {
+              e.preventDefault(); // Stop mobile bounce/scrolling
+              blowOutCandle.call(candle);
+            }
           }
-        });
+        };
+
+        document.addEventListener("touchmove", handleTouch, { passive: false });
+        document.addEventListener("touchstart", handleTouch, { passive: false });
 
         // Optional: Listen for keyboard input
         document.addEventListener("keypress", function (e) {
@@ -729,6 +758,7 @@
       // Create candles for the cake
       function createCandles() {
         const candleContainer = document.getElementById("candleContainer");
+        candleContainer.innerHTML = ""; // Clear any existing candles
 
         for (let i = 0; i < totalCandles; i++) {
           const candle = document.createElement("div");
